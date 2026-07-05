@@ -2,7 +2,7 @@
 Ввод координат: вручную или с помощью клика по координатной области.
 Есть возможность изменения масштаба рисунка.
 
-Бэк: Java, Hibernate, PostgreSQL, REST
-Архитектура: микросервисы (auth и geometry service)
-Фронт: React, HTML, CSS
-Поднимается в Docker
++Бэк: Java, Hibernate, PostgreSQL, REST
++Архитектура: микросервисы (auth и geometry service)
++Фронт: React, HTML, CSS
++Поднимается в Docker
