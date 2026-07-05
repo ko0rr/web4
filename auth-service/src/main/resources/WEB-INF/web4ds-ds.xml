@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+    <datasource jndi-name="java:jboss/datasources/AuthDS"
+                pool-name="AuthPool" enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:postgresql://db:5432/web4db</connection-url>
+        <driver>postgresql-42.7.7.jar</driver>
+        <security>
+            <user-name>admin</user-name>
+            <password>admin123</password>
+        </security>
+        <validation>
+            <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+            <validate-on-match>true</validate-on-match>
+        </validation>
+    </datasource>
+</datasources>
