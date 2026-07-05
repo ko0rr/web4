@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: lab4-db
+    environment:
+
+      POSTGRES_DB: web4db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/web4db
+      - POSTGRES_DB=web4db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+
+      - JWT_ACCESS_SECRET=super-secret-key-at-least-32-characters-long-12345
+      - JWT_REFRESH_SECRET=another-super-secret-key-at-least-32-characters-long-67890
+      - JWT_ACCESS_EXP_MIN=30
+      - JWT_REFRESH_EXP_DAYS=7
+
+  geometry-service:
+    build: ./geometry-service
+    container_name: geometry-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/web4db
+      - POSTGRES_DB=web4db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+
+      - JWT_ACCESS_SECRET=super-secret-key-at-least-32-characters-long-12345
+
+  frontend:
+    build: ./frontend
+    container_name: lab4-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - auth-service
+      - geometry-service
