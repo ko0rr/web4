@@ -4,7 +4,8 @@
 
 Есть возможность изменения масштаба рисунка.
 
----Бэк: Java, Hibernate, PostgreSQL, REST
+
+--Бэк: Java, Hibernate, PostgreSQL, REST
 ---Архитектура: микросервисы (auth и geometry service)
 ---Фронт: React, HTML, CSS
 ---Поднимается в Docker
